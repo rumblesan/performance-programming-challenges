@@ -1,37 +1,48 @@
-module Main (main) where
+module Main
+  ( main
+  ) where
 
-import System.Environment (getArgs)
-import qualified Data.List as L
+import qualified Data.Bool                     as B
+import qualified Data.List                     as L
+import           Data.Maybe                     ( fromMaybe )
+import           System.Environment             ( getArgs )
 
 main :: IO ()
 main = do
   args <- getArgs
   case args of
-    num:_ -> do
+    num : _ -> do
       showOutput $ findFactors $ read num
     _ -> putStrLn "no input given"
 
 showOutput :: (Integer, Integer) -> IO ()
 showOutput (f1, f2) = putStrLn ("[" ++ show f1 ++ "," ++ show f2 ++ "]")
 
+initialPrimeCount :: Integer
+initialPrimeCount = 1000
+
+isqrt :: Integer -> Integer
+isqrt n = floor (sqrt $ fromIntegral n :: Double)
+
 findFactors :: Integer -> (Integer, Integer)
-findFactors num = 
-  let
-    maxVal = floor $ (sqrt $ fromIntegral num :: Double)
-    initialPrimes = L.filter turnerIsPrime [2..1000]
-    seived = seive initialPrimes [2..maxVal]
-    f1 = search (isFactor num) seived
-    f2 = num `div` f1
-  in
-    (f2, f1)
+findFactors num =
+  let maxVal           = isqrt num
+      maxInitialPrimes = max maxVal initialPrimeCount
+      initialPrimes    = L.filter isPrime [2 .. maxInitialPrimes]
+      seived           = seive initialPrimes [2 .. maxVal]
+      f1               = fromMaybe 1 $ L.find (isFactor num) seived
+      f2               = num `div` f1
+  in  (f2, f1)
 
-isFactor :: Integer -> Integer -> (Integer, Bool)
-isFactor num v = (v, num `mod` v == 0)
+isPrime :: Integer -> Bool
+isPrime num = if num > 1
+  then L.null [ v | v <- [2 .. isqrt num], isFactor num v ]
+  else False
 
-search :: [Integer -> Bool] -> [(Integer, Bool)] -> Integer
-search ((f, check):xs) = if check then f else search xs
-search [] = 1
+isFactor :: Integer -> Integer -> Bool
+isFactor num v = num `mod` v == 0
 
 seive :: [Integer] -> [Integer] -> [Integer]
+seive (p : rest) factors =
+  p : (seive rest $ L.filter (B.not . isFactor p) factors)
 seive [] factors = factors
-seive (p:rest) factors = p:(seive rest $ L.filter (\f -> f `mod` p /= 0))
