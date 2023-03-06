@@ -1,0 +1,58 @@
+	Sat Mar  4 14:48 2023 Time and Allocation Profiling Report  (Final)
+
+	   prime-factors-exe +RTS -N -p -RTS 3602882480203397
+
+	total time  =      162.46 secs   (649828 ticks @ 1000 us, 4 processors)
+	total alloc = 967,517,620,448 bytes  (excludes profiling overheads)
+
+COST CENTRE MODULE SRC                         %time %alloc
+
+seive       Main   app/Main.hs:(59,1)-(61,26)   52.2   77.7
+isFactor    Main   app/Main.hs:56:1-33          47.6   22.2
+
+
+                                                                                                 individual      inherited
+COST CENTRE                  MODULE                SRC                        no.     entries  %time %alloc   %time %alloc
+
+MAIN                         MAIN                  <built-in>                 163           0    0.0    0.0   100.0  100.0
+ CAF                         GHC.Conc.Signal       <entire-module>            267           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Encoding       <entire-module>            249           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Encoding.Iconv <entire-module>            247           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Handle.FD      <entire-module>            238           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Handle.Text    <entire-module>            236           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.Read              <entire-module>            222           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.Show              <entire-module>            218           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.Event.Poll        <entire-module>            184           0    0.0    0.0     0.0    0.0
+ CAF                         GHC.Event.Thread      <entire-module>            183           0    0.0    0.0     0.0    0.0
+ CAF:$fShowAppConfig3        Main                  <no location info>         319           0    0.0    0.0     0.0    0.0
+ CAF:$fShowAppConfig5        Main                  <no location info>         318           0    0.0    0.0     0.0    0.0
+ CAF:$fShowAppConfig7        Main                  <no location info>         317           0    0.0    0.0     0.0    0.0
+ CAF:$fShowAppConfig9        Main                  <no location info>         316           0    0.0    0.0     0.0    0.0
+ CAF:defaultPrimeCount_rXG   Main                  app/Main.hs:17:1-17        315           0    0.0    0.0     0.0    0.0
+  defaultPrimeCount          Main                  app/Main.hs:17:1-24        330           1    0.0    0.0     0.0    0.0
+ CAF:lvl11_r37i              Main                  <no location info>         323           0    0.0    0.0     0.0    0.0
+ CAF:main1                   Main                  <no location info>         324           0    0.0    0.0     0.0    0.0
+  main                       Main                  app/Main.hs:(11,1)-(14,67) 326           1    0.0    0.0     0.0    0.0
+ main                        Main                  app/Main.hs:(11,1)-(14,67) 327           0    0.0    0.0   100.0  100.0
+  findFactors                Main                  app/Main.hs:(38,1)-(47,12) 331           1    0.0    0.0   100.0  100.0
+   findFactors.f1            Main                  app/Main.hs:44:5-71        344           1    0.1    0.0     0.1    0.0
+    isFactor                 Main                  app/Main.hs:56:1-33        345    13421782    0.1    0.0     0.1    0.0
+    number                   Main                  app/Main.hs:26:5-10        346           1    0.0    0.0     0.0    0.0
+   findFactors.f2            Main                  app/Main.hs:45:5-41        333           1    0.0    0.0     0.0    0.0
+    number                   Main                  app/Main.hs:26:5-10        350           1    0.0    0.0     0.0    0.0
+   findFactors.initialPrimes Main                  app/Main.hs:42:5-78        339           1    0.0    0.0     0.0    0.0
+    isPrime                  Main                  app/Main.hs:(50,1)-(53,24) 340        7918    0.0    0.0     0.0    0.0
+     isqrt                   Main                  app/Main.hs:35:1-49        341        7918    0.0    0.0     0.0    0.0
+     isPrime.f               Main                  app/Main.hs:53:9-24        347        7916    0.0    0.0     0.0    0.0
+      isFactor               Main                  app/Main.hs:56:1-33        348       85624    0.0    0.0     0.0    0.0
+   findFactors.maxVal        Main                  app/Main.hs:40:5-38        334           1    0.0    0.0     0.0    0.0
+    isqrt                    Main                  app/Main.hs:35:1-49        336           1    0.0    0.0     0.0    0.0
+    number                   Main                  app/Main.hs:26:5-10        335           1    0.0    0.0     0.0    0.0
+   findFactors.primeCount    Main                  app/Main.hs:41:5-54        337           1    0.0    0.0     0.0    0.0
+    initialPrimeCount        Main                  app/Main.hs:27:5-21        338           1    0.0    0.0     0.0    0.0
+   findFactors.seived        Main                  app/Main.hs:43:5-53        342           1    0.2    0.1    99.9  100.0
+    seive                    Main                  app/Main.hs:(59,1)-(61,26) 343        1001   52.2   77.7    99.7   99.9
+     isFactor                Main                  app/Main.hs:56:1-33        349 13421282500   47.5   22.2    47.5   22.2
+  parseArgs                  Main                  app/Main.hs:(20,1)-(23,47) 328           1    0.0    0.0     0.0    0.0
+  showOutput                 Main                  app/Main.hs:32:1-72        332           1    0.0    0.0     0.0    0.0
+  showsPrec                  Main                  app/Main.hs:29:12-15       329           1    0.0    0.0     0.0    0.0

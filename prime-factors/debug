@@ -1,0 +1,2 @@
+
+time .stack-work/install/x86_64-osx/ab662e12d470f3a7fc4d2a657db557b9c935062bffdb7262f002d9fb5305f2df/9.2.7/bin/prime-factors-exe +RTS -p -RTS 2218106617 1000
